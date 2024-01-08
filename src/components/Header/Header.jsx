@@ -6,6 +6,7 @@ import {
   getStyledIcon,
   Logo,
   HeaderWrapper,
+  LogoWrapper,
 } from './Header.styled';
 import LanguageSwitcher from './LanguageSwitcher/LanguageSwitcher';
 import { Burger, Menu } from './BurgerMenu/BurgerMenu';
@@ -16,6 +17,7 @@ const StyledLogo = getStyledIcon(LogoIcon);
 
 const Header = ({ currentPage }) => {
   const [open, setOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const headerClass =
     currentPage === '/'
       ? 'main-header'
@@ -32,9 +34,11 @@ const Header = ({ currentPage }) => {
           backgroundcolorlanghover={'rgba(255, 255, 255, 0.5)'}
         />
         <Logo className="element">
-          <StyledLogo />
+          <LogoWrapper href="/">
+            <StyledLogo />
+          </LogoWrapper>
         </Logo>
-        <UserMenu />
+        <UserMenu loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Cart />
       </HeaderWrapper>
     </HeaderStyled>

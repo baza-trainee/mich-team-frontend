@@ -12,7 +12,6 @@ export const CartWrapper = styled.div`
     background-color: rgba(255, 255, 255, 0.5);
   }
   @media screen and (min-width: 768px) {
-    color: green;
     padding: 16px;
     border-radius: 40px;
   }

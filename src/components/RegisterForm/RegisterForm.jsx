@@ -14,6 +14,12 @@ const RegisterForm = () => {
     const [trueEmail, setTrueEmail] = useState(true);
     const [truePassword, setTruePassword] = useState(true);
     const [trueCheckPassword, setTrueCheckPassword] = useState(true);
+    const [isCheckedRemember, setIsCheckedRemember] = useState(false);
+    const [isCheckedSubscribe, setIsCheckedSubscribe] = useState(false);
+    const [isCheckedAgree, setIsCheckedAgree] = useState(false);
+
+    
+
 
 
 
@@ -57,12 +63,22 @@ const RegisterForm = () => {
 
         const newUserData =  {
             "password": passwordValue,
-            "is_subscribed": true,
+            "is_subscribed": isCheckedSubscribe,
             "email": emailValue,
             "re_password": passwordValueCheck
+
+            
         }     
 
-        requestSignUpUser(newUserData);
+
+        // console.log(newUserData)
+
+        const formData = new URLSearchParams();
+        for (const key in newUserData) {
+            formData.append(key, newUserData[key]);
+        }
+
+        requestSignUpUser(formData);
       }
 
     
@@ -82,6 +98,20 @@ const RegisterForm = () => {
         setPassvordValueCheck(value);
         setTrueCheckPassword(true);
     }
+
+    const handleCheckboxChangeRemember = () => {
+        setIsCheckedRemember(!isCheckedRemember);
+    };
+
+    const handleCheckboxChangedSubscribe = () => {
+        setIsCheckedSubscribe(!isCheckedSubscribe);
+    };
+
+    const handleCheckboxChangedAgree = () => {
+        setIsCheckedAgree(!isCheckedAgree);
+    };
+
+
 
     return (
       <RegistForm action="">
@@ -121,15 +151,30 @@ const RegisterForm = () => {
 
             <CheckbBoxDiv>
                 <RegisterDivInput>
-                    <RegistInputCheck type="checkbox" id="rememb" /> 
+                    <RegistInputCheck
+                        type="checkbox"
+                        id="rememb"
+                        checked={isCheckedRemember}
+                        onChange={handleCheckboxChangeRemember}
+                    /> 
                     <LabelCheck htmlFor="rememb">Запам&rsquo;ятати мене </LabelCheck>
                 </RegisterDivInput>
                 <RegisterDivInput>
-                    <RegistInputCheck type="checkbox" id="subckribe"/> 
+                    <RegistInputCheck
+                        type="checkbox"
+                        id="subckribe"
+                        checked={isCheckedSubscribe}
+                        onChange={handleCheckboxChangedSubscribe}
+                    /> 
                     <LabelCheck htmlFor="subckribe">Так, я хочу підписатися на розсилку та отримувати інформацію про оновлення </LabelCheck>
                 </RegisterDivInput>
                 <RegisterDivInput>
-                    <RegistInputCheck type="checkbox" id="agrre"/> 
+                    <RegistInputCheck
+                        type="checkbox"
+                        id="agrre"
+                        checked={isCheckedAgree}
+                        onChange={handleCheckboxChangedAgree}
+                    /> 
                     <LabelCheck htmlFor="agrre">Я згоден з <LinkDocument>Політикою конфіденційності</LinkDocument> та <LinkDocument>Правилами користування сайтом</LinkDocument><SpanElem>*</SpanElem></LabelCheck>
                 </RegisterDivInput>
             </CheckbBoxDiv>

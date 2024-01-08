@@ -58,6 +58,7 @@ export const HeaderWrapper = styled.div`
 `}
 `;
 export const Logo = styled.div``;
+export const LogoWrapper = styled.a``;
 
 export const getStyledIcon = component => styled(component)`
   width: 74px;
